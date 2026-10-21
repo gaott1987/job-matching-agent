@@ -12,7 +12,7 @@
 
 ## 🚀 架构演进史 (Architecture Evolution)
 
-本项目的设计遵循了**“从简单到复杂，从验证到工程化”**的原则。
+本项目的设计遵循了**从简单到复杂，从验证到工程化**的原则。
 
 ```mermaid
 graph LR
@@ -24,7 +24,7 @@ graph LR
     style C fill:#fff3e0,stroke:#f57c00,stroke-width:2px
 ```
 
-### V1.0: Prompt 驱动的 MVP
+### [V1.0: Prompt 驱动的 MVP](./v1_prompt_mvp/)
 核心思路：将「JD + 档案 + 岗位池」一次性打包给强模型，利用“长上下文”与“思维链 Prompt”进行单次深度推理。
 
 测试结论：验证了复杂任务可以通过设计优良的 Prompt 完成；对比发现，静态任务下 Agent 的“过度拆解”反而带来噪音，确立了“单次强推理”的基线。（查看 V1 测试详情）
