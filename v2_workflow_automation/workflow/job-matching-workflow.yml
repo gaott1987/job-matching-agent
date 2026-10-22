@@ -1,0 +1,788 @@
+app:
+  description: 'AI Job Matching Tool '
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: workflow
+  name: AI岗位匹配度分析⼯具
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.2.23@f500332838ed670d0962a4f727618a2eb7e27a453ea56e72a28731f5f383ab72
+    version: null
+kind: app
+version: 0.7.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload: {}
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: start
+        targetType: llm
+      id: 1791364149722-source-1791368879115-target
+      selected: false
+      source: '1791364149722'
+      sourceHandle: source
+      target: '1791368879115'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: start
+        targetType: document-extractor
+      id: 1791364149722-source-1791986832370-target
+      selected: false
+      source: '1791364149722'
+      sourceHandle: source
+      target: '1791986832370'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: start
+        targetType: document-extractor
+      id: 1791364149722-source-1791986871969-target
+      selected: false
+      source: '1791364149722'
+      sourceHandle: source
+      target: '1791986871969'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: llm
+        targetType: llm
+      id: 1791368879115-source-1791370911955-target
+      selected: false
+      source: '1791368879115'
+      sourceHandle: source
+      target: '1791370911955'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: llm
+        targetType: template-transform
+      id: 1791370911955-source-1792664183147-target
+      selected: false
+      source: '1791370911955'
+      sourceHandle: source
+      target: '1792664183147'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: document-extractor
+        targetType: llm
+      id: 1791986832370-source-1791370911955-target
+      selected: false
+      source: '1791986832370'
+      sourceHandle: source
+      target: '1791370911955'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: document-extractor
+        targetType: llm
+      id: 1791986871969-source-1791370911955-target
+      selected: false
+      source: '1791986871969'
+      sourceHandle: source
+      target: '1791370911955'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: template-transform
+        targetType: end
+      id: 1792664183147-source-1792488025218-target
+      source: '1792664183147'
+      sourceHandle: source
+      target: '1792488025218'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - image
+          allowed_file_upload_methods:
+          - local_file
+          default: ''
+          hide: false
+          hint: ''
+          label: JD截图
+          options: []
+          placeholder: ''
+          required: true
+          type: file
+          variable: jd_image
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          default: ''
+          hide: false
+          hint: ''
+          label: 全量能力档案
+          options: []
+          placeholder: ''
+          required: true
+          type: file
+          variable: profile_file
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          default: ''
+          hide: false
+          hint: ''
+          label: 岗位池
+          options: []
+          placeholder: ''
+          required: true
+          type: file
+          variable: job_pool_file
+      height: 160
+      id: '1791364149722'
+      position:
+        x: -686.2557974632514
+        y: 359.47587546127346
+      positionAbsolute:
+        x: -686.2557974632514
+        y: 359.47587546127346
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.2
+          mode: chat
+          name: qwen3.8-flash
+          provider: langgenius/tongyi/tongyi
+        model_selector: null
+        prompt_template:
+        - id: 3d2e2b89-2b6c-44ea-8689-bda2dd6404b5
+          role: system
+          text: '你是一名专业的 JD（职位描述）信息提取助手。你的任务是从用户提供的 JD 截图中，准确提取结构化信息。
+
+
+            ## 输入
+
+            用户会提供一张包含 JD 内容的截图。请先识别截图中的全部文字，再按以下要求提取。
+
+
+            ## 提取原则
+
+            1. 只提取截图中实际出现的内容，不得推测或补充。
+
+            2. 如果某项信息截图中未提及，填写“未提及”。
+
+            3. 如果截图文字模糊无法辨认，填写“识别不清”，并在 extraction_note 中说明。
+
+            4. 岗位职责和任职要求必须分开，不要混在一起。
+
+            5. 如果截图中没有明确区分职责和要求，按语义判断：描述“做什么”的归入 responsibilities，描述“要求什么”的归入 qualification。
+
+            6. 任职要求中，硬技能、软技能、经验学历等按原文顺序逐条列出，不必强行分类。
+
+            7. 保留原文的格式和标点，不要修改。
+
+            8. 公司描述、团队规模、行业背景、工作地点、薪资范围，有则填，没有则填“未提及”，不要联网搜索或推测。
+
+
+            ## 注意事项
+
+            - 如果 JD 中同时出现中英文，以原文为准，不要翻译。
+
+            - 如果职责或要求条目较多，保留全部，不要省略。
+
+            - 不要输出任何解释性文字。
+
+
+            ## 输出格式
+
+            按输出变量中定义的结构化输出字段输出 JSON。'
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              company_description:
+                description: 公司描述，JD里有则填，没有则填'未提及'
+                enum: null
+                type: string
+              company_name:
+                description: 招聘单位，未提及则填'未提及'
+                type: string
+              extraction_note:
+                description: 提取备注，说明文本质量、缺失信息或模糊内容
+                enum: null
+                type: string
+              industry:
+                description: 行业背景，JD里有则填，没有则填'未提及'
+                enum: null
+                type: string
+              job_title:
+                description: 岗位名称
+                enum: null
+                type: string
+              language:
+                description: JD的主要语言
+                enum:
+                - 中文
+                - 英文
+                type: string
+              location:
+                description: 工作地点，JD里有则填，没有则填'未提及'
+                type: string
+              qualification:
+                description: 任职要求，逐条列出，用换行分隔
+                enum: null
+                type: string
+              responsibilities:
+                description: 岗位职责，逐条列出，用换行分隔
+                type: string
+              salary_range:
+                description: 薪资范围，JD里有则填，没有则填'未提及'
+                enum: null
+                type: string
+              team_size:
+                description: 团队规模，JD里有则填，没有则填'未提及'
+                enum: null
+                type: string
+            required:
+            - job_title
+            - company_name
+            - company_description
+            - team_size
+            - industry
+            - location
+            - salary_range
+            - responsibilities
+            - qualification
+            - extraction_note
+            - language
+            type: object
+        structured_output_enabled: true
+        title: JD截图提取 - LLM 1
+        type: llm
+        vision:
+          configs:
+            detail: high
+            variable_selector:
+            - '1791364149722'
+            - jd_image
+          enabled: true
+      height: 87
+      id: '1791368879115'
+      position:
+        x: -303.7764959598054
+        y: 240.6474569494867
+      positionAbsolute:
+        x: -303.7764959598054
+        y: 240.6474569494867
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.3
+          mode: chat
+          name: deepseek-v4-pro
+          provider: langgenius/tongyi/tongyi
+        model_selector: null
+        prompt_template:
+        - id: cd213a59-def4-4e84-b557-c41782204c43
+          role: system
+          text: '你是一名具备广泛行业背景的资深猎头与职业规划专家。你的专长是在不同行业、不同岗位类型中，准确评估候选人与目标职位的匹配度，并给出务实的求职建议。你必须严格按照以下步骤完成评估，不要跳步。
+
+
+            ## 输入信息
+
+
+            ### JD 结构化信息
+
+            - 岗位名称：{{#1791368879115.structured_output.job_title#}}
+
+            - 招聘单位：{{#1791368879115.structured_output.company_name#}}
+
+            - 公司描述：{{#1791368879115.structured_output.company_description#}}
+
+            - 薪资范围：{{#1791368879115.structured_output.salary_range#}}
+
+            - 行业背景：{{#1791368879115.structured_output.industry#}}
+
+            - 工作地点：{{#1791368879115.structured_output.location#}}
+
+            - 岗位职责：{{#1791368879115.structured_output.responsibilities#}}
+
+            - 任职要求：{{#1791368879115.structured_output.qualification#}}
+
+            - JD语言：{{#1791368879115.structured_output.language#}}
+
+
+            ### 岗位池
+
+            {{#1791986871969.text#}}
+
+
+            ### 候选人全量档案
+
+            {{#1791986832370.text#}}
+
+
+            ## 执行逻辑（请在内心严格推演，不要跳过）
+
+
+            ### 第一步：概括岗位画像与行业定位
+
+
+            1. 概括这个岗位到底需要什么样的人。
+
+            2. 概括这个岗位所属行业的特征。
+
+
+            ### 第二步：匹配岗位池并确定权重
+
+
+            1. **提取企业类型**：阅读岗位池，从岗位池的标题中提取企业类型（如：外企大厂、日资外企、国内科技大厂、AI 独角兽）。必须严格使用岗位池里的词汇，绝不能自己发明新词。可以在括号标注与实际JD岗位的差异。
+
+            2. **提取岗位类型**：从岗位池的分类中选取最匹配的岗位类型（如：AI 解决方案架构师）。不要直接照抄 JD 的原始岗位名称，必须映射到岗位池里的标准分类，但可以在括号内标注与JD原始岗位的差异。
+
+            3. **判断优先级**：根据岗位池信息判断投递优先级（第一、第二、第三、不投）。
+
+            4. **读取权重**：从岗位池中提取该岗位类型对应的各个评分维度的百分比权重。
+
+            *如果该 JD 与岗位池中的所有分类差异极大，请将优先级标记为 “不投”，并跳至输出。*
+
+
+            ### 第三步：匹配度打分计算
+
+
+            1. 分析档案与 JD，确认是否满足硬门槛。如果不满足，总分最高不得超过 50 分。
+
+            2. 结合权重与候选人档案，评估6个评分维度（准入匹配、硬技能、业务经验、职责层级、软技能、叙事匹配）的表现，给出每个维度的分数（0-5分）。
+
+            3. 根据提取的该岗位类型评分权重算出最终得分（0-100分）。
+
+            4. 给出建议：≥80 强烈推荐，60-79 推荐，40-59 谨慎，<40 不建议。（注意：硬门槛不满足或 “不投” 时，最高只能给 “谨慎”
+            或 “不建议”）。
+
+
+            ### 第四步：深度简历建议（若建议不是 “不建议”）
+
+
+            必须深挖档案，针对 JD 给出以下四个维度的实操建议：
+
+
+            1. **简历总体概述**：基于第一步的画像，简历主线叙事应该怎么写？
+
+            2. **必须体现的能力及证据**：JD 要求什么？档案里哪句话能证明？必须严格引用档案原话或事实。
+
+            3. **加分项信息**：档案里有哪些能证明学习能力、跨域能力的 “闪光点” 可以放进简历？
+
+            4. **挖掘潜力项**：针对 JD 的要求，候选人目前缺什么？怎么用过往经历去 “包装” 和挖掘？
+
+
+            ### 语言规则
+
+
+            如果 JD 是英文，简历方向建议用英文，分析说明用中文；如果 JD 是中文，全部用中文。
+
+
+            ## 输出要求
+
+            请严格根据 Dify 的结构化输出 Schema 输出 JSON。
+
+            - `job_title` 和 `company_name` 必须使用 JD 原文，不要修改。
+
+            - `dimension_scores` 请根据岗位池的权重，输出5个维度的名称和打分。
+
+            - `must_include` 输出最多5项。
+
+            - `bonus_items` 输出最多3项。
+
+            - `potential_to_dig` 输出最多2项。'
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              bonus_items:
+                description: 加分项信息，不超过3项
+                items:
+                  type: string
+                type: array
+              company_name:
+                description: JD中企业名称或者描述，完整原文，不要修改或者编造
+                type: string
+              company_type:
+                description: 填写岗位池中的企业类型
+                type: string
+              dimension_scores:
+                description: 各个维度的具体评分
+                items:
+                  properties:
+                    name:
+                      description: 维度名称，如：硬技能、经验、职责等
+                      type: string
+                    score:
+                      description: 该维度的得分，1-5分
+                      type: number
+                  required:
+                  - name
+                  - score
+                  type: object
+                type: array
+              hard_threshold_note:
+                description: 说明学历、年限等硬门槛是否满足
+                type: string
+              job_title:
+                description: JD中岗位名称，完整原文名称，不要修改或者编造
+                type: string
+              must_include:
+                description: 必须体现的能力及档案证据，不超过5项
+                items:
+                  properties:
+                    capability:
+                      description: JD要求的具体能力
+                      type: string
+                    evidence:
+                      description: 档案原话或事实
+                      type: string
+                  required:
+                  - capability
+                  - evidence
+                  type: object
+                type: array
+              overall_score:
+                description: 总体匹配度，0-100分
+                type: number
+              position_profile:
+                description: 概括岗位需要什么人及行业特征
+                type: string
+              potential_to_dig:
+                description: 需挖掘的潜力项，不超过2项
+                items:
+                  properties:
+                    missing:
+                      description: JD要求但档案没有的缺失项
+                      type: string
+                    suggestion:
+                      description: 如何用过往经历包装和挖掘的建议
+                      type: string
+                  required:
+                  - missing
+                  - suggestion
+                  type: object
+                type: array
+              priority:
+                description: 该岗位的优先级
+                enum:
+                - 第一
+                - 第二
+                - 第三
+                - 不投
+                type: string
+              reasons:
+                description: 核心建议原因，至少1条，不超过5条
+                items:
+                  type: string
+                type: array
+              recommendation:
+                description: 投递建议
+                enum:
+                - 强烈推荐
+                - 推荐
+                - 谨慎
+                - 不建议
+                type: string
+              resume_summary:
+                description: 基于岗位画像，简历主线叙事应该怎么写
+                type: string
+              role_type:
+                description: 填写岗位池中的岗位类型
+                type: string
+            required:
+            - job_title
+            - company_name
+            - company_type
+            - role_type
+            - priority
+            - position_profile
+            - overall_score
+            - dimension_scores
+            - recommendation
+            - hard_threshold_note
+            - reasons
+            - resume_summary
+            - must_include
+            - bonus_items
+            - potential_to_dig
+            type: object
+        structured_output_enabled: true
+        title: 综合分析 - LLM 2
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1791370911955'
+      position:
+        x: 119.896781291445
+        y: 395.50853808130796
+      positionAbsolute:
+        x: 119.896781291445
+        y: 395.50853808130796
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        is_array_file: false
+        selected: false
+        title: 档案提取 - 文档提取器
+        type: document-extractor
+        variable_selector:
+        - '1791364149722'
+        - profile_file
+      height: 104
+      id: '1791986832370'
+      position:
+        x: -303.7764959598054
+        y: 563.5720286905997
+      positionAbsolute:
+        x: -303.7764959598054
+        y: 563.5720286905997
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        is_array_file: false
+        selected: false
+        title: 岗位池提取 - 文档提取器
+        type: document-extractor
+        variable_selector:
+        - '1791364149722'
+        - job_pool_file
+      height: 104
+      id: '1791986871969'
+      position:
+        x: -303.7764959598054
+        y: 395.50853808130796
+      positionAbsolute:
+        x: -303.7764959598054
+        y: 395.50853808130796
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        outputs:
+        - value_selector:
+          - '1792664183147'
+          - output
+          value_type: string
+          variable: output
+        selected: false
+        title: 输出
+        type: end
+      height: 88
+      id: '1792488025218'
+      position:
+        x: 708.2162715643715
+        y: 395.50853808130796
+      positionAbsolute:
+        x: 708.2162715643715
+        y: 395.50853808130796
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        selected: false
+        template: "### 一、岗位画像与定位\r\n\r\n- **岗位名称**：{{ job_title }}\r\n- **企业名称**：{{\
+          \ company_name }}\r\n- **企业类型**：{{ company_type }}\r\n- **岗位类型**：{{ role_type\
+          \ }}\r\n- **优先级**：{{ priority }}\r\n- **岗位画像**：{{ position_profile }}\r\n\
+          \r\n### 二、匹配度评估\r\n\r\n- **总体匹配度**：{{ overall_score }} \r\n- **各个维度评分**：\r\
+          \n{% for dim in dimension_scores %}\r\n  - {{ dim.name }}：{{ dim.score }}\r\
+          \n{% endfor %}\r\n- **投递建议**：{{ recommendation }}\r\n- **硬门槛满足情况**：{{ hard_threshold_note\
+          \ }}\r\n- **核心建议原因**：\r\n{% for reason in reasons %}\r\n  {{ loop.index\
+          \ }}. {{ reason }}\r\n{% endfor %}\r\n\r\n### 三、深度简历修改建议\r\n\r\n**1. 简历总体概述**\r\
+          \n{{ resume_summary }}\r\n\r\n**2. 必须体现的能力及档案证据**\r\n{% for item in must_include\
+          \ %}\r\n- **能力**：{{ item.capability }}，**对应证据**：{{ item.evidence }}\r\n\
+          {% endfor %}\r\n\r\n**3. 加分项信息**\r\n{% for bonus in bonus_items %}\r\n-\
+          \ {{ bonus }}\r\n{% endfor %}\r\n\r\n**4. 需挖掘的潜力项**\r\n{% for potential\
+          \ in potential_to_dig %}\r\n- **缺失项**：{{ potential.missing }}，**挖掘建议**：{{\
+          \ potential.suggestion }}\r\n{% endfor %}"
+        title: 输出格式设置-模板转换
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1791370911955'
+          - structured_output
+          - job_title
+          variable: job_title
+        - value_selector:
+          - '1791370911955'
+          - structured_output
+          - company_name
+          variable: company_name
+        - value_selector:
+          - '1791370911955'
+          - structured_output
+          - company_type
+          variable: company_type
+        - value_selector:
+          - '1791370911955'
+          - structured_output
+          - role_type
+          variable: role_type
+        - value_selector:
+          - '1791370911955'
+          - structured_output
+          - priority
+          variable: priority
+        - value_selector:
+          - '1791370911955'
+          - structured_output
+          - position_profile
+          variable: position_profile
+        - value_selector:
+          - '1791370911955'
+          - structured_output
+          - overall_score
+          variable: overall_score
+        - value_selector:
+          - '1791370911955'
+          - structured_output
+          - dimension_scores
+          variable: dimension_scores
+        - value_selector:
+          - '1791370911955'
+          - structured_output
+          - recommendation
+          variable: recommendation
+        - value_selector:
+          - '1791370911955'
+          - structured_output
+          - hard_threshold_note
+          variable: hard_threshold_note
+        - value_selector:
+          - '1791370911955'
+          - structured_output
+          - reasons
+          variable: reasons
+        - value_selector:
+          - '1791370911955'
+          - structured_output
+          - resume_summary
+          variable: resume_summary
+        - value_selector:
+          - '1791370911955'
+          - structured_output
+          - must_include
+          variable: must_include
+        - value_selector:
+          - '1791370911955'
+          - structured_output
+          - bonus_items
+          variable: bonus_items
+        - value_selector:
+          - '1791370911955'
+          - structured_output
+          - potential_to_dig
+          variable: potential_to_dig
+      height: 51
+      id: '1792664183147'
+      position:
+        x: 416.7533173943266
+        y: 395.50853808130796
+      positionAbsolute:
+        x: 416.7533173943266
+        y: 395.50853808130796
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    viewport:
+      x: -124.19460516333834
+      y: 70.96058819384854
+      zoom: 0.6803950000871881
+  rag_pipeline_variables: []
