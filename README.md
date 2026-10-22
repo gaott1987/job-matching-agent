@@ -66,12 +66,33 @@ job-matching-agent/
 │   ├── results/doubao_expert_mode_result      # 跑出的 Markdown 分析报告示例截图
 │   └── README.md                              # V1 阶段测试记录与结论
 │
-├── docs/                                      # 架构设计文档与思考记录
-│   ├── architecture_evolution.md
-│   ├── input_data_strategy.md
-│   └── design_decisions.md
+├── v2_workflow_automation/                    # V2: Workflow 自动化流水线
+│   ├── README.md                              # V2 阶段说明（核心架构图、运行成果）
+│   ├── prompts/                               # 核心 Prompt 资产
+│   │   ├── node1_jd_extractor.md              # LLM节点1：JD解析的多模态 Prompt
+│   │   └── node2_comprehensive_eval.md        # LLM节点2：综合评估的 Prompt
+│   ├── workflow/
+│   │   ├── workflow_canvas.png                # Dify 编排界面的全貌截图
+│   │   └── job-matching-workflow.yml          # 导出的 DSL 文件
+│   └── results/                  
+│       └── test_output.png                    # 运行后输出的 Markdown 报告示例截图
 │
-└── (V2 & V3 目录即将更新...)
+├── v3_skill_modularization/
+│   ├── README.md                              # V3 阶段说明（核心架构图、运行成果）
+│   ├── mcp_manifest.json                      # 技能清单（供外部Agent/MCP调用）
+│   └── skills/
+│       ├── jd_parser/                         # 技能 1：JD 解析
+│       │   ├── prompt.md                      # 从 V2 抽离的 Prompt
+│       │   └── schema.json                    # 从 V2 抽离的 JSON Schema
+│       └── comprehensive_evaluator/           # 技能 2：综合评估
+│           ├── prompt.md                      # 从 V2 抽离的 Prompt
+│           └── schema.json                    # 从 V2 抽离的 JSON Schema
+│
+└── docs/                                      # 架构设计文档与思考记录
+    ├── architecture_evolution.md
+    ├── input_data_strategy.md
+    └── design_decisions.md
+
 ```
 
 ## ⚡ 快速开始 (Quick Start)
@@ -89,8 +110,8 @@ job-matching-agent/
 
 ## 🗺️ Roadmap (项目规划)
 - [x] V1.0：完成 Prompt MVP 验证与输入数据模板设计。
-- [ ] V2.0：完成 Dify Workflow 编排，打通自动化输入与结构化输出。
-- [ ] V3.0：完成 Skill 拆解，编写 mcp_manifest.json，支持 MCP 协议。
+- [x] V2.0：完成 Dify Workflow 编排，打通自动化输入与结构化输出。
+- [x] V3.0：完成 Skill 拆解，编写 mcp_manifest.json，支持 MCP 协议。
 - [ ] Future：接入 RAG 保护隐私，接入 Job Board API 实现自动岗位抓取。
 
 ## ⚠️ 数据隐私声明

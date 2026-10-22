@@ -1,0 +1,54 @@
+{
+  "name": "job-matching-agent-skills",
+  "version": "1.0.0",
+  "description": "针对求职场景的 AI 智能体技能库，包含 JD 解析与综合匹配评估能力。",
+  "protocol_version": "mcp-1.0",
+  "skills": [
+    {
+      "name": "jd_parser",
+      "description": "从招聘 JD 截图中提取结构化信息，包括岗位名称、职责、任职要求等。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "jd_image": {
+            "type": "string",
+            "description": "JD 截图的文件路径或 URL (支持 png/jpg)"
+          }
+        },
+        "required": ["jd_image"]
+      },
+      "returns": {
+        "type": "object",
+        "description": "返回结构化的 JD 数据。",
+        "schema_ref": "./skills/jd_parser/schema.json"
+      }
+    },
+    {
+      "name": "comprehensive_evaluator",
+      "description": "结合候选人全量档案与岗位池，对 JD 进行匹配度打分、岗位画像及简历策略生成。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "jd_text": {
+            "type": "object",
+            "description": "jd_parser 技能输出的结构化 JD 信息"
+          },
+          "profile_text": {
+            "type": "string",
+            "description": "候选人的全量能力档案 (Markdown 格式)"
+          },
+          "job_pool_text": {
+            "type": "string",
+            "description": "候选人的意向岗位池 (Markdown 格式)"
+          }
+        },
+        "required": ["jd_text", "profile_text", "job_pool_text"]
+      },
+      "returns": {
+        "type": "object",
+        "description": "返回结构化的评估结果，包含总分、建议等。",
+        "schema_ref": "./skills/comprehensive_evaluator/schema.json"
+      }
+    }
+  ]
+}

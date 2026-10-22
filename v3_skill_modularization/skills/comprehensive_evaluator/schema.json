@@ -1,0 +1,151 @@
+{
+  "type": "object",
+  "required": [
+    "job_title",
+    "company_name",
+    "company_type",
+    "role_type",
+    "priority",
+    "position_profile",
+    "overall_score",
+    "dimension_scores",
+    "recommendation",
+    "hard_threshold_note",
+    "reasons",
+    "resume_summary",
+    "must_include",
+    "bonus_items",
+    "potential_to_dig"
+  ],
+  "properties": {
+    "role_type": {
+      "type": "string",
+      "description": "填写岗位池中的岗位类型"
+    },
+    "potential_to_dig": {
+      "items": {
+        "type": "object",
+        "required": [
+          "missing",
+          "suggestion"
+        ],
+        "properties": {
+          "missing": {
+            "type": "string",
+            "description": "JD要求但档案没有的缺失项"
+          },
+          "suggestion": {
+            "type": "string",
+            "description": "如何用过往经历包装和挖掘的建议"
+          }
+        }
+      },
+      "type": "array",
+      "description": "需挖掘的潜力项，不超过2项"
+    },
+    "overall_score": {
+      "type": "number",
+      "description": "总体匹配度，0-100分"
+    },
+    "recommendation": {
+      "type": "string",
+      "description": "投递建议",
+      "enum": [
+        "强烈推荐",
+        "推荐",
+        "谨慎",
+        "不建议"
+      ]
+    },
+    "resume_summary": {
+      "type": "string",
+      "description": "基于岗位画像，简历主线叙事应该怎么写"
+    },
+    "company_name": {
+      "type": "string",
+      "description": "JD中企业名称或者描述，完整原文，不要修改或者编造"
+    },
+    "company_type": {
+      "type": "string",
+      "description": "填写岗位池中的企业类型"
+    },
+    "hard_threshold_note": {
+      "type": "string",
+      "description": "说明学历、年限等硬门槛是否满足"
+    },
+    "position_profile": {
+      "type": "string",
+      "description": "概括岗位需要什么人及行业特征"
+    },
+    "bonus_items": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "description": "加分项信息，不超过3项"
+    },
+    "job_title": {
+      "type": "string",
+      "description": "JD中岗位名称，完整原文名称，不要修改或者编造"
+    },
+    "priority": {
+      "type": "string",
+      "description": "该岗位的优先级",
+      "enum": [
+        "第一",
+        "第二",
+        "第三",
+        "不投"
+      ]
+    },
+    "dimension_scores": {
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "score"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "维度名称，如：硬技能、经验、职责等"
+          },
+          "score": {
+            "type": "number",
+            "description": "该维度的得分，1-5分"
+          }
+        }
+      },
+      "type": "array",
+      "description": "各个维度的具体评分"
+    },
+    "must_include": {
+      "items": {
+        "type": "object",
+        "required": [
+          "capability",
+          "evidence"
+        ],
+        "properties": {
+          "capability": {
+            "type": "string",
+            "description": "JD要求的具体能力"
+          },
+          "evidence": {
+            "type": "string",
+            "description": "档案原话或事实"
+          }
+        }
+      },
+      "type": "array",
+      "description": "必须体现的能力及档案证据，不超过5项"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "description": "核心建议原因，至少1条，不超过5条"
+    }
+  }
+}

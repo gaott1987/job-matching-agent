@@ -3,21 +3,21 @@
 ## 输入信息
 
 ### JD 结构化信息
-- 岗位名称：{{ node1_structured_output.job_title }}
-- 招聘单位：{{ node1_structured_output.company_name }}
-- 公司描述：{{ node1_structured_output.company_description }}
-- 薪资范围：{{ node1_structured_output.salary_range }}
-- 行业背景：{{ node1_structured_output.industry }}
-- 工作地点：{{ node1_structured_output.location }}
-- 岗位职责：{{ node1_structured_output.responsibilities }}
-- 任职要求：{{ node1_structured_output.qualification }}
-- JD语言：{{ node1_structured_output.language }}
+- 岗位名称：{{#1791368879115.structured_output.job_title#}}
+- 招聘单位：{{#1791368879115.structured_output.company_name#}}
+- 公司描述：{{#1791368879115.structured_output.company_description#}}
+- 薪资范围：{{#1791368879115.structured_output.salary_range#}}
+- 行业背景：{{#1791368879115.structured_output.industry#}}
+- 工作地点：{{#1791368879115.structured_output.location#}}
+- 岗位职责：{{#1791368879115.structured_output.responsibilities#}}
+- 任职要求：{{#1791368879115.structured_output.qualification#}}
+- JD语言：{{#1791368879115.structured_output.language#}}
 
 ### 岗位池
-{{ 岗位池提取node.text }}
+{{#1791986871969.text#}}
 
 ### 候选人全量档案
-{{ 档案提取node.text }}
+{{#1791986832370.text#}}
 
 ## 执行逻辑（请在内心严格推演，不要跳过）
 
